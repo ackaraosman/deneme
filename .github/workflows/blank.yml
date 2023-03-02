@@ -1,0 +1,20 @@
+name: Commit Output File
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run cagri.sh
+      run: bash create_cagri_file.sh
+
+    - name: Commit Output File
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "Add output file"
+        commit_options: "--no-verify"
+        file_pattern: "output.txt"
