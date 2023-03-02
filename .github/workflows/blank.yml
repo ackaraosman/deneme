@@ -1,20 +1,22 @@
-name: Commit Output File
+name: Commit File to Master
 
-on: push
+on:
+  push:
+    branches:
+      - main  # Replace with the default branch of your repository
 
 jobs:
-  build:
+  commit_file:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Run cagri.sh
-      run: bash create_cagri_file.sh
-
-    - name: Commit Output File
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: "Add output file"
-        commit_options: "--no-verify"
-        file_pattern: "output.txt"
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run cagri.sh
+        run: bash cagri.sh
+      - name: Commit file
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add .
+          git commit -m "Add generated file"
+          git push origin main  # Replace with the default branch of your repository
