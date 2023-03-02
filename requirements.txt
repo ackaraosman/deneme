@@ -1,0 +1,1 @@
+stefanzweifel/git-auto-commit-action@v4.4.2
